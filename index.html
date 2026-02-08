@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catat.In</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-text">Catat<span class="logo-dot">.</span>In</span>
+                </div>
+                <div class="header-actions">
+                    <div class="theme-toggle">
+                        <button class="theme-btn" id="theme-toggle" title="Ubah tema">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </div>
+                    <button class="menu-toggle" id="menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Container -->
+        <main class="main-container">
+            <!-- Sidebar - Mobile -->
+            <div class="mobile-sidebar" id="mobile-sidebar">
+                <div class="sidebar-header">
+                    <span class="logo-text">Catat<span class="logo-dot">.</span>In</span>
+                    <button class="close-sidebar" id="close-sidebar">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="sidebar-categories">
+                    <div class="category-filter active" data-category="all">
+                        <div class="category-icon" style="background-color: #E2E8F0;">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <span>Semua Catatan</span>
+                    </div>
+                    <div class="category-filter" data-category="pinned">
+                        <div class="category-icon" style="background-color: #FFB74D;">
+                            <i class="fas fa-thumbtack"></i>
+                        </div>
+                        <span>Disematkan</span>
+                    </div>
+                    <div class="category-filter" data-category="work">
+                        <div class="category-icon" style="background-color: #FFE082;">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <span>Pekerjaan</span>
+                    </div>
+                    <div class="category-filter" data-category="ideas">
+                        <div class="category-icon" style="background-color: #90CAF9;">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span>Ide & Inspirasi</span>
+                    </div>
+                    <div class="category-filter" data-category="shopping">
+                        <div class="category-icon" style="background-color: #A5D6A7;">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <span>Belanja</span>
+                    </div>
+                    <div class="category-filter" data-category="daily">
+                        <div class="category-icon" style="background-color: #EF9A9A;">
+                            <i class="fas fa-calendar-day"></i>
+                        </div>
+                        <span>Keseharian</span>
+                    </div>
+                    <div class="category-filter" data-category="other">
+                        <div class="category-icon" style="background-color: #B39DDB;">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </div>
+                        <span>Lainnya</span>
+                    </div>
+                    <div class="nav-divider"></div>
+                    <div class="category-filter" data-category="trash">
+                        <div class="category-icon" style="background-color: #BDBDBD;">
+                            <i class="fas fa-trash"></i>
+                        </div>
+                        <span>Sampah</span>
+                        <span class="trash-count" id="mobile-trash-count">0</span>
+                    </div>
+                </div>
+                <div class="sidebar-footer">
+                    <div class="note-stats">
+                        <div class="stat-item">
+                            <span class="stat-count" id="total-notes">0</span>
+                            <span class="stat-label">Catatan</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-count" id="pinned-notes">0</span>
+                            <span class="stat-label">Disematkan</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-count" id="trash-notes">0</span>
+                            <span class="stat-label">Sampah</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Create Note Section -->
+                <section class="create-note-section">
+                    <div class="create-note-card" id="create-note-card">
+                        <div class="create-header">
+                            <h2><i class="fas fa-edit"></i> Catatan Baru</h2>
+                        </div>
+                        <div class="create-body">
+                            <input type="text" class="note-title-input" id="note-title" placeholder="Judul catatan...">
+                            <textarea class="note-content-input" id="note-content" placeholder="Tulis catatan Anda di sini..." rows="3"></textarea>
+                            
+                            <div class="note-categories">
+                                <span class="categories-label">Kategori:</span>
+                                <div class="category-options">
+                                    <button class="category-option active" data-category="work">
+                                        <i class="fas fa-briefcase"></i>
+                                        <span>Pekerjaan</span>
+                                    </button>
+                                    <button class="category-option" data-category="ideas">
+                                        <i class="fas fa-lightbulb"></i>
+                                        <span>Ide</span>
+                                    </button>
+                                    <button class="category-option" data-category="shopping">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <span>Belanja</span>
+                                    </button>
+                                    <button class="category-option" data-category="daily">
+                                        <i class="fas fa-calendar-day"></i>
+                                        <span>Keseharian</span>
+                                    </button>
+                                    <button class="category-option" data-category="other">
+                                        <i class="fas fa-ellipsis-h"></i>
+                                        <span>Lainnya</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="create-actions">
+                                <button class="btn-primary" id="add-note-btn">
+                                    <i class="fas fa-plus"></i> Tambah Catatan
+                                </button>
+                                <button class="btn-secondary" id="cancel-create-note">
+                                    Batal
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Notes Section -->
+                <section class="notes-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <h2 id="section-title"><i class="fas fa-sticky-note"></i> Catatan Anda</h2>
+                            <div class="notes-info">
+                                <span class="notes-count" id="notes-count">0 catatan</span>
+                                <div class="filter-badge" id="filter-badge">
+                                    Semua
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="section-controls">
+                            <div class="search-box">
+                                <i class="fas fa-search"></i>
+                                <input type="text" id="search-notes" placeholder="Cari catatan...">
+                                <button class="clear-search" id="clear-search">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="view-options">
+                                <button class="view-option active" data-view="grid" title="Tampilan Grid">
+                                    <i class="fas fa-th-large"></i>
+                                </button>
+                                <button class="view-option" data-view="list" title="Tampilan List">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category Filters - Desktop -->
+                    <div class="category-filters">
+                        <button class="category-filter-btn active" data-category="all">
+                            <i class="fas fa-layer-group"></i>
+                            <span>Semua</span>
+                        </button>
+                        <button class="category-filter-btn" data-category="pinned">
+                            <div class="color-indicator" style="background-color: #FFB74D;"></div>
+                            <span>Disematkan</span>
+                        </button>
+                        <button class="category-filter-btn" data-category="work">
+                            <div class="color-indicator" style="background-color: #FFE082;"></div>
+                            <span>Pekerjaan</span>
+                        </button>
+                        <button class="category-filter-btn" data-category="ideas">
+                            <div class="color-indicator" style="background-color: #90CAF9;"></div>
+                            <span>Ide & Inspirasi</span>
+                        </button>
+                        <button class="category-filter-btn" data-category="shopping">
+                            <div class="color-indicator" style="background-color: #A5D6A7;"></div>
+                            <span>Belanja</span>
+                        </button>
+                        <button class="category-filter-btn" data-category="daily">
+                            <div class="color-indicator" style="background-color: #EF9A9A;"></div>
+                            <span>Keseharian</span>
+                        </button>
+                        <button class="category-filter-btn" data-category="other">
+                            <div class="color-indicator" style="background-color: #B39DDB;"></div>
+                            <span>Lainnya</span>
+                        </button>
+                        <div class="filter-divider"></div>
+                        <button class="category-filter-btn trash-filter" data-category="trash">
+                            <div class="color-indicator" style="background-color: #BDBDBD;"></div>
+                            <span>Sampah</span>
+                            <span class="trash-badge" id="desktop-trash-count">0</span>
+                        </button>
+                    </div>
+
+                    <!-- Notes Container -->
+                    <div class="notes-container" id="notes-container">
+                        <!-- Empty state akan dibuat oleh JavaScript -->
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Floating Action Button -->
+        <button class="fab" id="fab-add-note">
+            <i class="fas fa-plus"></i>
+        </button>
+
+        <!-- Edit Modal -->
+        <div class="modal" id="edit-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-edit"></i> Edit Catatan</h3>
+                    <button class="close-modal" id="close-edit-modal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="note-title-input" id="edit-note-title" placeholder="Judul catatan...">
+                    <textarea class="note-content-input" id="edit-note-content" placeholder="Tulis catatan Anda di sini..." rows="4"></textarea>
+                    
+                    <div class="note-categories">
+                        <span class="categories-label">Kategori:</span>
+                        <div class="category-options">
+                            <button class="category-option" data-category="work">
+                                <i class="fas fa-briefcase"></i>
+                                <span>Pekerjaan</span>
+                            </button>
+                            <button class="category-option" data-category="ideas">
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Ide</span>
+                            </button>
+                            <button class="category-option" data-category="shopping">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span>Belanja</span>
+                            </button>
+                            <button class="category-option" data-category="daily">
+                                <i class="fas fa-calendar-day"></i>
+                                <span>Keseharian</span>
+                            </button>
+                            <button class="category-option" data-category="other">
+                                <i class="fas fa-ellipsis-h"></i>
+                                <span>Lainnya</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary" id="cancel-edit">
+                        Batal
+                    </button>
+                    <button class="btn-primary" id="save-edit-btn">
+                        <i class="fas fa-save"></i> Simpan Perubahan
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Move to Trash Confirmation -->
+        <div class="modal modal-sm" id="trash-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-trash"></i> Pindahkan ke Sampah</h3>
+                    <button class="close-modal" id="close-trash-modal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah Anda yakin ingin memindahkan catatan ini ke sampah?</p>
+                    <p class="trash-info">Catatan di sampah dapat dipulihkan atau dihapus permanen.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary" id="cancel-trash">
+                        Batal
+                    </button>
+                    <button class="btn-warning" id="confirm-trash">
+                        Pindahkan ke Sampah
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Delete Permanently Confirmation -->
+        <div class="modal modal-sm" id="delete-permanently-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Hapus Permanen</h3>
+                    <button class="close-modal" id="close-delete-permanently-modal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah Anda yakin ingin menghapus catatan ini secara permanen?</p>
+                    <p class="delete-warning">Catatan yang dihapus permanen tidak dapat dikembalikan.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary" id="cancel-delete-permanently">
+                        Batal
+                    </button>
+                    <button class="btn-danger" id="confirm-delete-permanently">
+                        Ya, Hapus Permanen
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty Trash Confirmation -->
+        <div class="modal modal-sm" id="empty-trash-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-trash-alt"></i> Kosongkan Sampah</h3>
+                    <button class="close-modal" id="close-empty-trash-modal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah Anda yakin ingin mengosongkan sampah?</p>
+                    <p class="delete-warning">Semua catatan di sampah akan dihapus permanen dan tidak dapat dikembalikan.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary" id="cancel-empty-trash">
+                        Batal
+                    </button>
+                    <button class="btn-danger" id="confirm-empty-trash">
+                        Ya, Kosongkan Sampah
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Restore Note Modal -->
+        <div class="modal modal-sm" id="restore-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-undo"></i> Pulihkan Catatan</h3>
+                    <button class="close-modal" id="close-restore-modal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah Anda yakin ingin memulihkan catatan ini?</p>
+                    <p class="restore-info">Catatan akan dikembalikan ke daftar catatan aktif.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary" id="cancel-restore">
+                        Batal
+                    </button>
+                    <button class="btn-success" id="confirm-restore">
+                        Ya, Pulihkan
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast Notification -->
+        <div class="toast" id="toast"></div>
+    </div>
+
+    <!-- Template untuk JavaScript -->
+    <template id="note-card-template">
+        <div class="note-card" data-id="">
+            <div class="note-card-header">
+                <h3 class="note-title"></h3>
+                <span class="note-date"></span>
+            </div>
+            <div class="note-content"></div>
+            <div class="note-footer">
+                <div class="note-category">
+                    <i class="category-icon"></i>
+                    <span class="category-name"></span>
+                </div>
+                <div class="note-actions">
+                    <!-- Aksi akan ditambahkan oleh JavaScript -->
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="pin-indicator-template">
+        <div class="pin-indicator">
+            <i class="fas fa-thumbtack"></i>
+        </div>
+    </template>
+
+    <template id="empty-state-template">
+        <div class="empty-state">
+            <div class="empty-icon">
+                <i class="fas fa-sticky-note"></i>
+            </div>
+            <h3>Belum ada catatan</h3>
+            <p>Mulai dengan menambahkan catatan pertama Anda!</p>
+            <button class="btn-primary" id="create-first-note">
+                <i class="fas fa-plus"></i> Buat Catatan Pertama
+            </button>
+        </div>
+    </template>
+
+    <template id="empty-trash-template">
+        <div class="empty-state">
+            <div class="empty-icon">
+                <i class="fas fa-trash"></i>
+            </div>
+            <h3>Sampah Kosong</h3>
+            <p>Tidak ada catatan di sampah</p>
+        </div>
+    </template>
+
+    <template id="trash-actions-template">
+        <div class="trash-actions">
+            <div class="trash-info">
+                <h4 class="trash-count-text"></h4>
+                <p>Catatan di sampah akan disimpan selama 30 hari sebelum dihapus otomatis</p>
+            </div>
+            <div class="trash-buttons">
+                <button class="btn-danger" id="empty-trash-btn">
+                    <i class="fas fa-trash-alt"></i> Kosongkan Sampah
+                </button>
+            </div>
+        </div>
+    </template>
+
+    <template id="notes-grid-template">
+        <div class="notes-grid"></div>
+    </template>
+
+    <template id="notes-list-template">
+        <div class="notes-list"></div>
+    </template>
+
+    <script src="script.js"></script>
+</body>
+</html>
