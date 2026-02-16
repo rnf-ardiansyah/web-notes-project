@@ -81,6 +81,12 @@
     --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
 }
 
+/* Hilangkan tap highlight biru pada mobile */
+* {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 /* Base Reset */
 * {
     margin: 0;
